@@ -6,9 +6,9 @@ metadata:
   namespace: awx
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-labels:
-  name: awx
-  app: awx
+  labels:
+    name: awx
+    app: awx
 spec:
   destination:
     namespace: awx
