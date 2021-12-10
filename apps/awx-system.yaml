@@ -3,10 +3,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: awx-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   labels:
     app: awx
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
-  project: default
+  project: awx
   source:
     repoURL: "https://github.com/shrapk2/awx-operator-helm"
     targetRevision: HEAD

@@ -3,10 +3,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: awx-operator
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   labels:
     app: awx
 spec:
-  project: default
+  project: awx
   source:
     repoURL: "https://github.com/shrapk2/awx-operator-helm"
     targetRevision: HEAD
