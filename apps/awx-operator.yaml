@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: awx-operator
+  app: awx-operator
+  namespace: awx
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/shrapk2/awx-operator-helm"
+    path: awx/awx-operator
+    targetRevision: argo-dev
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: awx
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
