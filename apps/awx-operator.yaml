@@ -3,11 +3,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: awx-operator
-  namespace: awx
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: awx
     app: awx
 spec:
   project: default
