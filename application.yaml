@@ -13,7 +13,7 @@ spec:
     path: apps
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: awx
+    namespace: argocd
   syncPolicy:
     automated:
       selfHeal: true
