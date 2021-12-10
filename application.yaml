@@ -8,14 +8,14 @@ metadata:
   labels:
     app: awx
 spec:
-  destination:
-    namespace: awx
-    name: "https://kubernetes.default.svc"
   project: default
   source:
-    path: apps
     repoURL: https://github.com/shrapk2/argo-awx-application
     targetRevision: HEAD
+    path: apps
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: awx
   syncPolicy:
     automated:
       selfHeal: true
