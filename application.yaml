@@ -12,17 +12,19 @@ spec:
 
   # Allow manifests to deploy from any Git repos
   sourceRepos:
-  - '*'
+    - "*"
 
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   destinations:
-  - namespace: 'awx'
-    server: 'https://kubernetes.default.svc'
+    - namespace: "awx"
+      server: "https://kubernetes.default.svc"
+    - namespace: "argocd"
+      server: "https://kubernetes.default.svc"
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
 
 ---
 apiVersion: argoproj.io/v1alpha1
