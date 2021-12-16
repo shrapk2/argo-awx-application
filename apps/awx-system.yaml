@@ -6,11 +6,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    app: awx
+    app: awx2
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  project: awx
+  project: awx2
   source:
     repoURL: "https://github.com/shrapk2/awx-operator-helm"
     targetRevision: HEAD
@@ -18,12 +18,12 @@ spec:
     helm:
       parameters:
         - name: network.hostname
-          value: "awx.example.com"
+          value: "awx2.example.com"
     # plugin:
     #   name: kustomized-helm
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: awx
+    namespace: awx2
   syncPolicy:
     automated:
       selfHeal: true
