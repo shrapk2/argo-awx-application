@@ -2,30 +2,31 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: awx-system2
+  name: microservices
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    app: awx2
+    app: microservices
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  project: awx2
+  project: microservices
   source:
-    repoURL: "https://github.com/shrapk2/awx-operator-helm"
-    targetRevision: HEAD
-    path: awx-system
+    repoURL: "git@github.com:cetic/helm-microservice.git"
+    targetRevision: master
+    path: microservices
     helm:
       parameters:
-        - name: network.hostname
-          value: "awx2.example.com"
+        - name: ingress.hosts[0].host
+          value: "microservice.example.com"
     # plugin:
     #   name: kustomized-helm
   destination:
     name: "in-cluster"
-    namespace: awx2
+    namespace: microservices
   syncPolicy:
     automated:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - PruneLast=true

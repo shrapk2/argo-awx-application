@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: awx2
+  name: microservices
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -16,7 +16,7 @@ spec:
 
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   destinations:
-    - namespace: "awx2"
+    - namespace: "microservices"
       name: "in-cluster"
     - namespace: "argocd"
       name: "in-cluster"
@@ -30,16 +30,14 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: awx2
+  name: root-microservices
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  labels:
-    app: awx2
 spec:
-  project: awx2
+  project: microservices
   source:
     repoURL: https://github.com/shrapk2/argo-awx-application
-    targetRevision: system2
+    targetRevision: demoapp
     path: apps
   destination:
     name: "in-cluster"
