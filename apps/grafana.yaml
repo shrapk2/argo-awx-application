@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: grafana
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: core-services
+  source:
+    repoURL: "https://github.com/bitnami/charts.git"
+    targetRevision: master
+    chart: grafana
+    # helm:
+    #   parameters:
+    #     - name: ingress.hosts[0].host
+    #       value: "microservice.example.com"
+  destination:
+    name: "in-cluster"
+    namespace: grafana
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

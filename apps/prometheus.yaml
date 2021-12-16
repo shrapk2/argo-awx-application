@@ -2,28 +2,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: microservices
+  name: prometheus
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    app: microservices
+    app: prometheus
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  project: microservices
+  project: core-services
   source:
-    repoURL: "https://github.com/cetic/helm-microservice.git"
+    repoURL: "https://github.com/bitnami/charts.git"
     targetRevision: master
-    path: microservices
-    helm:
-      parameters:
-        - name: ingress.hosts[0].host
-          value: "microservice.example.com"
-    # plugin:
-    #   name: kustomized-helm
+    chart: prometheus
+    # helm:
+    #   parameters:
+    #     - name: ingress.hosts[0].host
+    #       value: "microservice.example.com"
   destination:
     name: "in-cluster"
-    namespace: microservices
+    namespace: prometheus
   syncPolicy:
     automated:
       selfHeal: true
