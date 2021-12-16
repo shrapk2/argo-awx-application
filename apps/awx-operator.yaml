@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: awx-operator3
+  name: awx-operator2
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
@@ -14,7 +14,7 @@ spec:
     targetRevision: HEAD
     path: awx-operator
   destination:
-    server: "https://kubernetes.default.svc"
+    name: "in-cluster"
     namespace: awx2
     # plugin:
     #   name: kustomized-helm

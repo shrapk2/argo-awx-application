@@ -17,9 +17,9 @@ spec:
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   destinations:
     - namespace: "awx2"
-      server: "https://kubernetes.default.svc"
+      name: "in-cluster"
     - namespace: "argocd"
-      server: "https://kubernetes.default.svc"
+      name: "in-cluster"
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
@@ -42,7 +42,7 @@ spec:
     targetRevision: system2
     path: apps
   destination:
-    server: "https://kubernetes.default.svc"
+    name: "in-cluster"
     namespace: argocd
   syncPolicy:
     automated:

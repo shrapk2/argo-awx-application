@@ -22,7 +22,7 @@ spec:
     # plugin:
     #   name: kustomized-helm
   destination:
-    server: "https://kubernetes.default.svc"
+    name: "in-cluster"
     namespace: awx2
   syncPolicy:
     automated:
