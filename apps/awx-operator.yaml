@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: awx-operator
+  name: awx-operator3
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
