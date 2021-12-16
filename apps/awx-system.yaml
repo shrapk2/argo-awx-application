@@ -15,12 +15,12 @@ spec:
     repoURL: "https://github.com/shrapk2/awx-operator-helm"
     targetRevision: HEAD
     path: awx-system
-    # helm:
-    #   parameters:
-    #     - name: network.hostname
-    #       value: "awx.example.com"
-    plugin:
-      name: kustomized-helm
+    helm:
+      parameters:
+        - name: network.hostname
+          value: "awx.example.com"
+    # plugin:
+    #   name: kustomized-helm
   destination:
     server: "https://kubernetes.default.svc"
     namespace: awx
