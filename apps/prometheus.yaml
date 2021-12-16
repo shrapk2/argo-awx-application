@@ -13,8 +13,8 @@ spec:
   project: core-services
   source:
     repoURL: "https://github.com/bitnami/charts.git"
-    targetRevision: master
-    chart: prometheus
+    targetRevision: 6.5.2
+    chart: kube-prometheus
     # helm:
     #   parameters:
     #     - name: ingress.hosts[0].host
