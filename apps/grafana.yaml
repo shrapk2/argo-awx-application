@@ -12,7 +12,7 @@ metadata:
 spec:
   project: core-services
   source:
-    repoURL: "https://github.com/bitnami/charts.git"
+    repoURL: "https://charts.bitnami.com/bitnami"
     targetRevision: 7.2.12
     chart: grafana
     # helm:
