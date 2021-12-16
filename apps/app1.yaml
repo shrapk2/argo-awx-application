@@ -12,7 +12,7 @@ metadata:
 spec:
   project: microservices
   source:
-    repoURL: "git@github.com:cetic/helm-microservice.git"
+    repoURL: "https://github.com/cetic/helm-microservice.git"
     targetRevision: master
     path: microservices
     helm:
