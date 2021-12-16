@@ -19,6 +19,8 @@ spec:
     #   parameters:
     #     - name: network.hostname
     #       value: "awx.example.com"
+    plugin:
+      name: kustomized-helm
   destination:
     server: "https://kubernetes.default.svc"
     namespace: awx

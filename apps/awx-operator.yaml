@@ -16,6 +16,8 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: awx
+    plugin:
+      name: kustomized-helm
   syncPolicy:
     automated:
       selfHeal: true
