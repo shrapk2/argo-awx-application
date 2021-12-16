@@ -39,7 +39,7 @@ spec:
   project: awx
   source:
     repoURL: https://github.com/shrapk2/argo-awx-application
-    targetRevision: HEAD
+    targetRevision: kustomized
     path: apps
   destination:
     server: "https://kubernetes.default.svc"
