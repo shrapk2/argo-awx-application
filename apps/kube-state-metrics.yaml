@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-state-metrics
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: kube-state-metrics
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: core-services
+  source:
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: v2
+    chart: kube-state-metrics
+    # helm:
+    #   parameters:
+    #     - name: ingress.hosts[0].host
+    #       value: "microservice.example.com"
+  destination:
+    name: "in-cluster"
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
