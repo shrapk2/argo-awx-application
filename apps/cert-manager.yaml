@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: cert-manager
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: core-services
+  source:
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: 0.1.28
+    chart: cert-manager
+    # helm:
+    #   parameters:
+    #     - name: ingress.hosts[0].host
+    #       value: "microservice.example.com"
+  destination:
+    name: "in-cluster"
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
