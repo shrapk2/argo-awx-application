@@ -61,24 +61,23 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true
-
----
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
-  name: add-labels
-spec:
-  background: false
-  rules:
-    - name: add-ns-label
-      match:
-        resources:
-          kinds:
-            - Namespace
-      exclude:
-        clusterroles: ["cluster-admin"]
-      mutate:
-        patchStrategicMerge:
-          metadata:
-            labels:
-              istio-injection: "enabled"
+# ---
+# apiVersion: kyverno.io/v1
+# kind: ClusterPolicy
+# metadata:
+#   name: add-labels
+# spec:
+#   background: false
+#   rules:
+#     - name: add-ns-label
+#       match:
+#         resources:
+#           kinds:
+#             - Namespace
+#       exclude:
+#         clusterroles: ["cluster-admin"]
+#       mutate:
+#         patchStrategicMerge:
+#           metadata:
+#             labels:
+#               istio-injection: "enabled"
