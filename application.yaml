@@ -24,6 +24,8 @@ spec:
       name: "in-cluster"
     - namespace: "metrics-server"
       name: "in-cluster"
+    - namespace: "kube-system"
+      name: "in-cluster"
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
     - group: "*"
