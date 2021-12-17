@@ -70,6 +70,8 @@ metadata:
   name: core-services
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: core-services
 spec:
   project: core-services
   source:
