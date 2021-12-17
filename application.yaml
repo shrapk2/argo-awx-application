@@ -9,7 +9,7 @@ metadata:
 stringData:
   name: bitnami-helm-repository
   url: https://charts.bitnami.com/bitnami
-
+  type: helm
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
