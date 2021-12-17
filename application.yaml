@@ -10,6 +10,20 @@ stringData:
   name: bitnami-helm-repository
   url: https://charts.bitnami.com/bitnami
   type: helm
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kyverno-helm-repository
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: kyverno-helm-repository
+  url: https://kyverno.github.io/kyverno/
+  type: helm
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -39,6 +53,8 @@ spec:
     - namespace: "cert-manager"
       name: "in-cluster"
     - namespace: "external-dns"
+      name: "in-cluster"
+    - namespace: "kyverno"
       name: "in-cluster"
     - namespace: "kube-system"
       name: "in-cluster"

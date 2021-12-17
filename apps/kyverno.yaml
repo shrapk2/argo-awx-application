@@ -1,0 +1,84 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: kyverno
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: core-services
+  source:
+    repoURL: "https://kyverno.github.io/kyverno/"
+    targetRevision: v2.1.3
+    chart: kyverno
+    # helm:
+    #   parameters:
+    #     - name: ingress.hosts[0].host
+    #       value: "microservice.example.com"
+  destination:
+    name: "in-cluster"
+    namespace: kyverno
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno-policies
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: kyverno
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: core-services
+  source:
+    repoURL: "https://kyverno.github.io/kyverno/"
+    targetRevision: v2.1.3
+    chart: kyverno-policies
+    # helm:
+    #   parameters:
+    #     - name: ingress.hosts[0].host
+    #       value: "microservice.example.com"
+  destination:
+    name: "in-cluster"
+    namespace: kyverno
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-labels
+spec:
+  background: false
+  rules:
+    - name: add-ns-label
+      match:
+        resources:
+          kinds:
+            - Namespace
+      exclude:
+        clusterroles: ["cluster-admin"]
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            labels:
+              istio-injection: "enabled"
